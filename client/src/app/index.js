@@ -20,7 +20,7 @@ function App() {
     <Container maxWidth="lg">
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
-          MMRS
+          MMR
         </Typography>
         <img className={classes.image} src={mmrs} alt="logo" height="60" />
       </AppBar>
