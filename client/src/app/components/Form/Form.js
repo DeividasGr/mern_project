@@ -16,26 +16,15 @@ function Form({ currentId, setCurrentId }) {
   });
   const dispatch = useDispatch();
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId ? state.posts.find((message) => message._id === currentId) : null
   );
 
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (currentId) {
-      dispatch(updatedPost(currentId, postData));
-    } else {
-      dispatch(createPost(postData));
-    }
-    clear();
-  };
-
   const clear = () => {
-    setCurrentId(null);
+    setCurrentId(0);
     setPostData({
       creator: '',
       title: '',
@@ -44,6 +33,19 @@ function Form({ currentId, setCurrentId }) {
       selectedFile: '',
     });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (currentId === 0) {
+      dispatch(createPost(postData));
+      clear();
+    } else {
+      dispatch(updatedPost(currentId, postData));
+      clear();
+    }
+  };
+
   return (
     <Paper className={classes.paper}>
       <form
